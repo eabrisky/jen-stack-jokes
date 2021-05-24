@@ -40,3 +40,8 @@ app.use(express.static('server/public'));
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
 }); // end spin up server
+
+app.get('/jokes', (req, res) => {
+  console.log('in get numbers - server');
+  res.send(jokes);
+})
