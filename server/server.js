@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const app = express();
 const bodyParser = require( 'body-parser' );
+const { response } = require('express');
 const PORT = 5000;
 
 // use bodyParser.urlencoded throughout the app with this:
@@ -32,7 +33,7 @@ let jokes = [
     jokeQuestion: "I went to the zoo the other day, it had one dog...",
     punchLine: "It was a shih tzu."
   }
-];
+]; // end jokes array
 
 // serve back static files
 app.use(express.static('server/public'));
@@ -44,4 +45,27 @@ app.listen(PORT, () => {
 app.get('/jokes', (req, res) => {
   console.log('in get numbers - server');
   res.send(jokes);
-})
+}) // end app.get
+
+app.post('/jokes', (req, res) => {
+  console.log('POST /jokes - server', req.body);
+  
+  // assign req.body (data object from client) to variables
+  const whoseJoke = req.body.whoseJoke;
+  const jokeQuestion = req.body.jokeQuestion;
+  const punchLine = req.body.punchLine;
+
+  // put new variables in object
+  let newJoke = {
+    whoseJoke: whoseJoke,
+    jokeQuestion: jokeQuestion,
+    punchLine: punchLine
+  }; // end newJoke object
+
+  // push newJoke to jokes array
+  jokes.push(newJoke);
+
+  // send created status on server
+  res.sendStatus(201);
+  
+}) // end app.post

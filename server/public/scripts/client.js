@@ -28,6 +28,13 @@ function handleJokes(){
             punchLine: punchLine
         }
     }).then(function (response){
+        console.log('POST /jokes SUCCESSFUL', response);
+        
+        // clear inputs
+        $('#outputDiv').empty();
+
+        // Refresh and re-render jokes
+        getJokes();
 
     }) // end .then
     .catch(err => {
