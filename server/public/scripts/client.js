@@ -31,7 +31,9 @@ function handleJokes(){
         console.log('POST /jokes SUCCESSFUL', response);
         
         // clear inputs
-        $('#outputDiv').empty();
+        $('#whoseJokeIn').val('');
+        $('#questionIn').val('');
+        $('#punchlineIn').val('');
 
         // Refresh and re-render jokes
         getJokes();
@@ -50,5 +52,16 @@ function getJokes(){
     }).then(function (response){
         // so we know we got here, at least
         console.log('in /jokes GET - client', response);
+        
+        // render jokes to the DOM
+        $('#outputDiv').empty();
+        for(let joke of response){
+            $('#outputDiv').append(`
+                <li>
+                ${joke.whoseJoke} ${joke.jokeQuestion} ${joke.punchLine}
+                </li>
+            `); // end appendage
+        } // end for loop
+
     }) // end .then
 } // end getJokes fn
