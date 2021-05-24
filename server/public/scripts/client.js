@@ -2,10 +2,13 @@ console.log('client.js sourced');
 
 $( document ).ready( onReady );
 
-let jokes;
+// declare global variable to uhhhh wait i don't think i need to do this
+// let jokes;
 
 function onReady() {
     console.log('DOM ready - client');
+
+    // C L I C K   L I S T E N E R
     $('#addJokeButton').on('click', handleJokes)
 
     // get existing jokes from server on page load
@@ -15,6 +18,7 @@ function onReady() {
 function handleJokes(){
     console.log('made it to handleJokes fn - client');
 
+    // assign input values to variables for the data object
     const whoseJoke = $('#whoseJokeIn').val();
     const jokeQuestion = $('#questionIn').val();
     const punchLine = $('#punchlineIn').val();
@@ -53,12 +57,15 @@ function getJokes(){
         // so we know we got here, at least
         console.log('in /jokes GET - client', response);
         
-        // render jokes to the DOM
+        // empty jokes container
+        // so we don't keep reposting old jokes with new ones
         $('#outputDiv').empty();
+
+        // render new joke on DOM
         for(let joke of response){
             $('#outputDiv').append(`
                 <li>
-                ${joke.whoseJoke} ${joke.jokeQuestion} ${joke.punchLine}
+                "${joke.jokeQuestion} ${joke.punchLine}" - ${joke.whoseJoke}
                 </li>
             `); // end appendage
         } // end for loop

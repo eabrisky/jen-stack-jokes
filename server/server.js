@@ -35,7 +35,7 @@ let jokes = [
   }
 ]; // end jokes array
 
-// serve back static files
+// serve back static files to express
 app.use(express.static('server/public'));
 
 app.listen(PORT, () => {
@@ -44,6 +44,8 @@ app.listen(PORT, () => {
 
 app.get('/jokes', (req, res) => {
   console.log('in get numbers - server');
+
+  // send existing joke array from server to /jokes
   res.send(jokes);
 }) // end app.get
 
